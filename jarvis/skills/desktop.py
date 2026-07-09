@@ -13,21 +13,21 @@ import webbrowser
 import datetime
 
 
-def open_app(app: str) -> str:
+def open_app(app: str, **kwargs) -> str:
     sys = platform.system()
     try:
         if sys == "Darwin":
             subprocess.Popen(["open", "-a", app])
         elif sys == "Windows":
             os.startfile(app)
-        else:  
+        else:  # Linux
             subprocess.Popen([app])
         return f"Opened {app}."
     except Exception as e:
         return f"Could not open {app}: {e}"
 
 
-def take_screenshot(filename: str = "") -> str:
+def take_screenshot(filename: str = "", **kwargs) -> str:
     ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     name = filename or f"screenshot_{ts}.png"
     try:
@@ -40,13 +40,13 @@ def take_screenshot(filename: str = "") -> str:
         return f"Screenshot failed: {e}"
 
 
-def search_web(query: str) -> str:
+def search_web(query: str, **kwargs) -> str:
     url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
     webbrowser.open(url)
     return f"Opened browser: {url}"
 
 
-def run_command(command: str) -> str:
+def run_command(command: str, **kwargs) -> str:
     try:
         result = subprocess.run(
             command, shell=True, capture_output=True, text=True, timeout=15
@@ -59,9 +59,10 @@ def run_command(command: str) -> str:
         return f"Error: {e}"
 
 
-def get_system_info() -> str:
-    import psutil
+def get_system_info(**kwargs) -> str:
+    import platform
     try:
+        import psutil
         cpu = psutil.cpu_percent(interval=0.5)
         mem = psutil.virtual_memory()
         disk = psutil.disk_usage("/")
@@ -72,17 +73,17 @@ def get_system_info() -> str:
         return f"OS: {platform.system()} {platform.release()} | psutil not installed (pip install psutil)"
 
 
-def get_time() -> str:
+def get_time(**kwargs) -> str:
     now = datetime.datetime.now()
     return now.strftime("It's %A, %B %d %Y — %H:%M:%S")
 
 
-def open_url(url: str) -> str:
+def open_url(url: str, **kwargs) -> str:
     webbrowser.open(url)
     return f"Opened: {url}"
 
 
-def write_file(path: str, content: str) -> str:
+def write_file(path: str, content: str, **kwargs) -> str:
     try:
         with open(path, "w") as f:
             f.write(content)
@@ -91,7 +92,7 @@ def write_file(path: str, content: str) -> str:
         return f"Write failed: {e}"
 
 
-def read_file(path: str) -> str:
+def read_file(path: str, **kwargs) -> str:
     try:
         with open(path) as f:
             return f.read()[:2000]
@@ -126,7 +127,7 @@ SKILLS = [
     },
     {
         "name": "get_system_info",
-        "description": "Get CPU, RAM, and disk usage stats.",
+        "description": "Get CPU, RAM, and disk usage stats. Safely handles unexpected automated parameters.",
         "trigger_phrases": ["system info", "cpu", "memory", "disk"],
         "func": get_system_info,
     },

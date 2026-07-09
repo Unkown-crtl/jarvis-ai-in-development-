@@ -1,4 +1,4 @@
-# J.A.R.V.I.S.
+# J.A.R.V.I.S. v2
 **Just A Rather Very Intelligent System** — local AI desktop assistant powered by **Llama 3.1** via Ollama.
 
 ---
@@ -121,3 +121,35 @@ Create/edit `reminders.json` in the project root:
   }
 ]
 ```
+
+---
+
+## v2 New Features
+
+### 🎤 Voice Control
+- Click **Voice OFF** in the top bar to toggle continuous listening
+- Speak naturally — Jarvis transcribes with Google Speech Recognition
+- Responses are spoken back via pyttsx3 (offline TTS)
+- Install: `pip install SpeechRecognition pyttsx3 pyaudio`
+
+### 🧠 Reasoning Engine (Plan → Reason → Act)
+- Complex requests automatically trigger the reasoning pipeline
+- First generates a **JSON plan** (goal, steps, complexity)
+- Then **reasons step-by-step** in the Reason tab
+- Finally responds in Chat with full context
+- Press **🧠 Think** button to force reasoning on any message
+
+### 💻 Code Engine (4-Stage Pipeline)
+Go to the **Code** tab:
+1. **Review** — static analysis + LLM code review
+2. **Debug** — runs code, captures errors, explains root causes
+3. **Fix** — produces corrected code
+4. **Upgrade** — modernizes patterns, adds type hints, improves quality
+5. **Full Run** — all 4 stages at once
+
+### 🔌 MCP Server Tester
+Go to the **MCP** tab:
+- **Full Test** — TCP ping → handshake → tool discovery
+- **Ping** — quick latency check
+- **List Tools** — enumerate all tools on an MCP server
+- **Call Tool** — invoke any tool with custom JSON params

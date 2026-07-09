@@ -1,3 +1,15 @@
 requests>=2.31.0
 psutil>=5.9.0
 pyautogui>=0.9.54
+
+# Voice control (STT)
+SpeechRecognition>=3.10.0
+pyaudio>=0.2.13        # mic input
+
+# Voice control (TTS)
+pyttsx3>=2.90          # offline TTS (primary)
+# gTTS>=2.4.0          # online TTS (optional, better quality)
+
+# Code engine (optional linting)
+# flake8>=7.0.0        # pip install flake8
+

@@ -14,7 +14,7 @@ from typing import Callable
 class Agent:
     name: str
     description: str
-    interval: float   
+    interval: float          # seconds between runs (0 = run once)
     func: Callable
     enabled: bool = True
     last_run: float = 0.0

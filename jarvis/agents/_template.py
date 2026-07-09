@@ -30,7 +30,7 @@ AGENTS = [
         "name": "my_agent",
         "description": "Example agent that logs a ping every 5 minutes.",
         "interval": 300,
-        "enabled": False, 
+        "enabled": False,   # Disabled by default (it's just an example)
         "func": my_agent,
     }
 ]

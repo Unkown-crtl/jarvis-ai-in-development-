@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 J.A.R.V.I.S. — Just A Rather Very Intelligent System
 Powered by Llama 3.1 via Ollama
@@ -16,32 +17,8 @@ Llama 3.1 setup:
 """
 import sys
 import os
-import subprocess
-import time
-import requests
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-
-def ensure_ollama_running():
-    try:
-        requests.get("http://localhost:11434/api/tags", timeout=2)
-    except requests.exceptions.ConnectionError:
-        try:
-            if sys.platform == "win32":
-                subprocess.Popen(["ollama", "serve"], creationflags=subprocess.CREATE_NO_WINDOW)
-            else:
-                subprocess.Popen(["ollama", "serve"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            
-            for _ in range(10):
-                time.sleep(1)
-                try:
-                    requests.get("http://localhost:11434/api/tags", timeout=1)
-                    break
-                except requests.exceptions.ConnectionError:
-                    continue
-        except FileNotFoundError:
-            print("Error: 'ollama' command not found. Please install Ollama.", file=sys.stderr)
 
 
 def run_gui():
@@ -71,7 +48,6 @@ def run_cli():
 
 
 if __name__ == "__main__":
-    ensure_ollama_running()
     if "--cli" in sys.argv:
         run_cli()
     else:
