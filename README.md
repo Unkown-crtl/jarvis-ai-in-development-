@@ -147,9 +147,3 @@ Go to the **Code** tab:
 4. **Upgrade** — modernizes patterns, adds type hints, improves quality
 5. **Full Run** — all 4 stages at once
 
-### 🔌 MCP Server Tester
-Go to the **MCP** tab:
-- **Full Test** — TCP ping → handshake → tool discovery
-- **Ping** — quick latency check
-- **List Tools** — enumerate all tools on an MCP server
-- **Call Tool** — invoke any tool with custom JSON params
